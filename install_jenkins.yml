@@ -14,3 +14,10 @@
     service: name=jenkins state=restarted
   - name: Enable jenkins service
     service: name=jenkins enabled=true
+  - name: wait 30sec
+    wait_for: delay=30 port=8080
+  - name: Cat initpassword
+    shell: /var/lib/jenkins/secrets/intialAdminPassword
+    register: jenkinspassword
+  - name: print jenkinspassword
+    debug: var={{jenkinspassword.stdout}}
