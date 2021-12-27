@@ -4,5 +4,9 @@
   tasks:
   - name: install httpd
     yum: name=httpd state=present
+  - name: configure index.html
+    shell: echo "Hello CMR Welcome to Synamedia">index.html
+  - name: copy index.html to /var/www/html
+    copy: src=index.html dest=/var/www/html/index.html
   - name: start httpd
     service: name=httpd state=restarted
